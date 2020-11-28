@@ -9,17 +9,20 @@
         class="todo-text"
         placeholder="New todo"
       />
+      <datepicker v-on:update="dateUpdated()"> </datepicker> 
       <button class="todo-add-button" v-on:click="addTodo()">Add</button>
     </div>
     
     <ul v-if="todos.length">
       <li class="todo">
         <span class="todo-text list-header">Todo</span>
+        <span class="todo-text list-header">DueDate</span>
         <span class="todo-empty-button list-header"></span>
       </li>
 
       <li class="todo" v-for="todo in todos" :key="todo.id">
         <span class="todo-text">{{ todo.text }}</span>
+        <span class="todo-date">{{ todo.date }}</span>
         <button class="todo-remove-button" v-on:click="removeTodo(todo)">Remove</button>
       </li>
     </ul>
@@ -28,13 +31,17 @@
 </template>
 
 <script>
+import datepicker from './components/datepicker.vue'
+
 export default {
   name: "App",
   components: {
+    datepicker
   },
   data() {
     return {
       newTodoText: "",
+      newToDoDate: "",
       todos: [],
     };
   },
@@ -44,15 +51,21 @@ export default {
 
         this.todos.push({
           text: this.newTodoText,
+          date: this.newToDoDate,
           id: Date.now(),
           done: false
         });
 
         this.newTodoText = "";
+      
       }
     },
     removeTodo (item) {
       this.todos = this.todos.filter((_item) => _item !== item);
+    },
+    dateUpdated (date) {
+      this.newTodoDate = date.clone()
+
     }
   },
 };
