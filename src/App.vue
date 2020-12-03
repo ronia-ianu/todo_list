@@ -9,20 +9,20 @@
         class="todo-text"
         placeholder="New todo"
       />
-      <datepicker v-on:update="dateUpdated()"> </datepicker> 
+      <datepicker v-on:update="dateUpdated"> </datepicker> 
       <button class="todo-add-button" v-on:click="addTodo()">Add</button>
     </div>
     
     <ul v-if="todos.length">
       <li class="todo">
         <span class="todo-text list-header">Todo</span>
-        <span class="todo-text list-header">DueDate</span>
+        <span class="todo-text date-header">DueDate</span>
         <span class="todo-empty-button list-header"></span>
       </li>
 
       <li class="todo" v-for="todo in todos" :key="todo.id">
         <span class="todo-text">{{ todo.text }}</span>
-        <span class="todo-date">{{ todo.date }}</span>
+        <span class="todo-date">{{ todo.date.format('MM-DD-YYYY') }}</span>
         <button class="todo-remove-button" v-on:click="removeTodo(todo)">Remove</button>
       </li>
     </ul>
@@ -64,7 +64,7 @@ export default {
       this.todos = this.todos.filter((_item) => _item !== item);
     },
     dateUpdated (date) {
-      this.newTodoDate = date.clone()
+      this.newToDoDate = date.clone()
 
     }
   },
