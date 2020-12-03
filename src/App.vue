@@ -21,9 +21,7 @@
       </li>
 
       <li class="todo" v-for="todo in todos" :key="todo.id">
-        <span class="todo-text">{{ todo.text }}</span>
-        <span class="todo-date">{{ todo.date.format('MM-DD-YYYY') }}</span>
-        <button class="todo-remove-button" v-on:click="removeTodo(todo)">Remove</button>
+       <todo :todo="todo" v-on:remove="removeTodo(todo)"/>
       </li>
     </ul>
     <p class="none" v-else>Add a new todo in the input above</p>
@@ -31,6 +29,13 @@
 </template>
 
 <script>
+import todo from 'src/components/todo.vue'
+
+export default {
+  name: "App",
+  components: {
+    todo
+  },
 import datepicker from './components/datepicker.vue'
 
 export default {
@@ -55,11 +60,14 @@ export default {
           id: Date.now(),
           done: false
         });
+        
 
-        this.newTodoText = "";
+        this.newToDoText = "";
       
       }
     },
+    this.todos.sort((todoA, todoB) => -todoA.date.diff(todoB.date)),
+    
     removeTodo (item) {
       this.todos = this.todos.filter((_item) => _item !== item);
     },
