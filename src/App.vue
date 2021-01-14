@@ -29,19 +29,16 @@
 </template>
 
 <script>
-import todo from 'src/components/todo.vue'
-
-export default {
-  name: "App",
-  components: {
-    todo
-  },
 import datepicker from './components/datepicker.vue'
+import todo from './components/todo.vue'
+import API from './api'
+
+const apiURL='http://localhost:8081/todos'
 
 export default {
   name: "App",
   components: {
-    datepicker
+    todo, datepicker
   },
   data() {
     return {
@@ -50,7 +47,15 @@ export default {
       todos: [],
     };
   },
+  mounted() {
+    this.api = API(apiURL)
+    this.getAllTodos
+  }
+  
   methods: {
+    getAllTodos(){
+
+    },
     addTodo() {
       if (this.newTodoText) {
 
