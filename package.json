@@ -8,6 +8,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+<<<<<<< HEAD
+=======
+    "moment": "^2.29.1",
+>>>>>>> feat/fullstack
     "vue": "^3.0.0"
   },
   "devDependencies": {
